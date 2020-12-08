@@ -18,8 +18,8 @@ export class TemaService {
     return this.http.get<Tema[]>('http://localhost:9000/tema', this.token)
   }
 
-  getByIdTema(id: number) {
-    return this.http.get(`https://localhost:9000/tema/${id}`, this.token)
+  getByIdTema(id: number) : Observable<Tema> {
+    return this.http.get<Tema>(`https://localhost:9000/tema/${id}`, this.token)
   }
 
   postTema(tema: Tema) : Observable<Tema> {
