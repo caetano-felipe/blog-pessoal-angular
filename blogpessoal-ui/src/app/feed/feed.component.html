@@ -56,8 +56,8 @@
                       <small>Tema: {{ item.tema.descricao }}</small>
                     </div>
                     <div class="col-md-4 d-flex justify-content-end">
-                      <button class="mr-3 btn btn-outline-info">Editar</button>
-                      <button class="btn btn-outline-danger ml-3">Apagar</button>
+                      <button class="mr-3 btn btn-outline-info" [routerLink]="['/editar-post', item.id]">Editar</button>
+                      <button class="btn btn-outline-danger ml-3" [routerLink]="['/delete-post', item.id]">Apagar</button>
                     </div>
                   </div>
                 </div>
@@ -79,8 +79,33 @@
               <button class="btn btn-outline-warning w-100" type="button">Pesquisar</button>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-12" *ngFor="let item of listaTemas | orderBy : key : reverse">
+              <div *ngFor='let post of item.postagem'>
+
+                <div class="card mt-5 mb-5" >
+                  <div class="card-header">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-md-12">
+                            <h5 class="card-title"> {{post.titulo}} </h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body" >
+                  <p class="card-text" aria-describedby="texto"> {{post.texto}} </p>
+                  <small id="texto" class="form-text m-0 text-muted mb-3 text-monospace">
+                    Postado em {{post.date | date: 'dd/MM/yyyy'}} às {{post.date | date:'HH:mm'}}</small>
+                </div>
+
+                </div>
+            </div>
+            </div>
+          </div>
+
         </div>
       </div>
+
     </div>
   </div>
 </div>
