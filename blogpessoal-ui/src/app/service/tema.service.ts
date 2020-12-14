@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment.prod';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -11,7 +12,7 @@ export class TemaService {
   constructor(private http: HttpClient) { }
 
   token = {
-    headers: new HttpHeaders().set('Authorization', localStorage.getItem('token')!)
+    headers: new HttpHeaders().set('Authorization', environment.token)
   }
 
   getAllTemas() : Observable<Tema[]> {
@@ -32,5 +33,9 @@ export class TemaService {
 
   deleteTema(id: number) {
     return this.http.delete(`http://localhost:9000/tema/${id}`, this.token)
+  }
+
+  getByNomeTema(nome: string) : Observable<Tema[]> {
+    return this.http.get<Tema[]>(`http://localhost:9000/tema/nome/${nome}`, this.token)
   }
 }
